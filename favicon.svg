@@ -1,4 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <circle cx="32" cy="32" r="32" fill="#a8321e"/>
-  <path d="M23 15v34M23 32l18-17M23 32l18 17" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="square"/>
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#d9a441" stroke-width="1.6" opacity=".85"/>
+
+  <!-- Пар -->
+  <g fill="none" stroke="#fbf6ef" stroke-width="3.4" stroke-linecap="round">
+    <path d="M23 24c-2.2-2.6 1.8-4.2-.4-7"/>
+    <path d="M32 22c-2.4-2.9 2-4.6-.4-8"/>
+    <path d="M41 24c-2.2-2.6 1.8-4.2-.4-7"/>
+  </g>
+
+  <!-- Чаша -->
+  <path d="M12 33h40c0 11.6-9 20-20 20S12 44.6 12 33Z" fill="#fbf6ef"/>
+
+  <!-- Карри -->
+  <ellipse cx="32" cy="33" rx="20" ry="6.4" fill="#e07a2e"/>
+  <ellipse cx="32" cy="33" rx="20" ry="6.4" fill="none" stroke="#d9a441" stroke-width="1.6"/>
+  <path d="M22 32.5c3-2 7-2.6 10-1.6" fill="none" stroke="#ffdda6" stroke-width="2" stroke-linecap="round" opacity=".8"/>
 </svg>
