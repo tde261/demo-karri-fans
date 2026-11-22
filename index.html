@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Карри - Фаны — индийская кухня в Йошкар-Оле</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<meta name="description" content="Ресторан индийской кухни «Карри - Фаны» в Йошкар-Оле. Аутентичные блюда, доставка и заказ на вынос. ул. Якова Эшпая, 150.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Onest:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a120b;
+    --ink-soft: #4a3b2e;
+    --muted: #8a7a68;
+    --cream: #fbf6ef;
+    --cream-2: #f4ebdd;
+    --line: #e8dccb;
+    --red: #a8321e;
+    --red-deep: #7d2415;
+    --saffron: #e07a2e;
+    --gold: #d9a441;
+    --radius: 20px;
+    --shadow: 0 24px 60px -28px rgba(45,25,10,.3);
+    --shadow-sm: 0 10px 30px -18px rgba(45,25,10,.22);
+    --display: 'Onest', 'Manrope', sans-serif;
+    --sans: 'Manrope', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; }
+  ::selection { background: var(--saffron); color: #fff; }
+  .wrap { width: min(1180px, 92vw); margin-inline: auto; }
+
+  /* ============================================================
+     HEADER — всегда тёмное стекло
+     ============================================================ */
+    /* ============================================================
+     HEADER — светлое стекло, тёмный текст всегда
+     ============================================================ */
+  .site-header {
+    position: fixed; inset: 0 0 auto; z-index: 100;
+    padding: 16px 0;
+    transition: padding .35s ease;
+  }
+  .header-shell {
+    display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    padding: 8px 8px 8px 18px;
+    border-radius: 999px;
+    background: rgba(251,246,239,.42);
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(232,220,203,.6);
+    box-shadow: 0 10px 36px -22px rgba(45,25,10,.3);
+    transition: background .35s ease, border-color .35s ease, box-shadow .35s ease;
+  }
+  .site-header.scrolled .header-shell {
+    background: rgba(251,246,239,.77);
+  }
+  .site-header.scrolled { padding: 10px 0; }
+
+  /* Все элементы шапки — тёмные, всегда */
+  .header-shell .brand-name { color: var(--ink); }
+  .header-shell .brand-name small { color: var(--muted); }
+  .header-shell .brand-mark { background: var(--red); color: #fff; }
+  .header-shell .nav-links a { color: var(--ink-soft); }
+  .header-shell .nav-links a:hover { background: rgba(168,50,30,.08); color: var(--red); }
+  .header-shell .btn-ghost { color: var(--ink); border-color: rgba(26,18,11,.18); }
+  .header-shell .btn-ghost:hover { border-color: var(--ink); }
+  .header-shell .burger { border-color: rgba(26,18,11,.18); }
+  .header-shell .burger span,
+  .header-shell .burger span::before,
+  .header-shell .burger span::after { background: var(--ink); }
+
+  .brand-name, .brand-name small, .brand-mark,
+  .nav-links a, .btn-ghost, .burger,
+  .burger span, .burger span::before, .burger span::after {
+    transition: color .35s ease, background .35s ease, border-color .35s ease;
+  }
+
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark {
+    width: 38px; height: 38px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--display); font-size: 16px; font-weight: 700;
+    flex: none;
+  }
+  .brand-name { font-size: 15.5px; font-weight: 700; line-height: 1.1; letter-spacing: -.01em; }
+  .brand-name small { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; margin-top: 2px; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+    padding: 8px 15px; border-radius: 999px;
+    font-size: 13.5px; font-weight: 600;
+  }
+  .header-actions { display: flex; align-items: center; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px 26px; border-radius: 999px; border: 0; cursor: pointer;
+    font-family: var(--sans); font-size: 14.5px; font-weight: 700; letter-spacing: .01em;
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease, color .2s, border-color .2s;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--red); color: #fff; }
+  .btn-primary:hover { background: var(--red-deep); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; border: 1.5px solid rgba(26,18,11,.16); }
+  .btn-sm { padding: 10px 18px; font-size: 13.5px; }
+  .burger {
+    display: none; width: 42px; height: 42px; border-radius: 50%;
+    border: 1.5px solid rgba(26,18,11,.16); background: transparent;
+    cursor: pointer; place-items: center; flex: none;
+  }
+  .burger span { display: block; width: 17px; height: 2px; border-radius: 2px; position: relative; transition: .25s; }
+  .burger span::before, .burger span::after { content: ''; position: absolute; left: 0; width: 17px; height: 2px; border-radius: 2px; transition: .25s; }
+  .burger span::before { top: -5.5px; }
+  .burger span::after { top: 5.5px; }
+  .burger.open span { background: transparent !important; }
+  .burger.open span::before { top: 0; transform: rotate(45deg); }
+  .burger.open span::after { top: 0; transform: rotate(-45deg); }
+
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 99;
+    background: rgba(26,18,11,.5);
+    opacity: 0; pointer-events: none; transition: opacity .3s;
+  }
+  .mobile-menu.open { opacity: 1; pointer-events: auto; }
+  .mobile-panel {
+    position: absolute; top: 88px; right: 4vw; left: 4vw;
+    background: var(--cream); border-radius: 22px; padding: 20px;
+    box-shadow: var(--shadow);
+    transform: translateY(-10px); transition: transform .3s;
+  }
+  .mobile-menu.open .mobile-panel { transform: none; }
+  .mobile-panel a { display: block; padding: 13px 6px; font-size: 16px; font-weight: 700; border-bottom: 1px solid var(--line); color: var(--ink); }
+  .mobile-panel a:last-of-type { border-bottom: 0; }
+  .mobile-panel .btn { width: 100%; margin-top: 12px; }
+  .mobile-panel .btn-ghost { color: var(--ink); border-color: rgba(26,18,11,.16); }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 128px 0 0; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .hero-copy { max-width: 560px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11.5px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 22px;
+  }
+  .hero-eyebrow::before { content: ''; width: 28px; height: 1.5px; background: var(--saffron); }
+  .hero h1 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(38px, 5.2vw, 62px); line-height: 1.02; letter-spacing: -.035em;
+    color: var(--ink); margin-bottom: 24px;
+  }
+  .hero h1 em { font-style: normal; color: var(--red); }
+  .hero-sub { font-size: clamp(16px, 1.5vw, 18px); color: var(--ink-soft); margin-bottom: 34px; max-width: 46ch; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .hero-note { display: flex; align-items: center; gap: 10px; margin-top: 28px; font-size: 13.5px; color: var(--muted); }
+  .hero-note .dot { width: 8px; height: 8px; border-radius: 50%; background: #2f9e44; box-shadow: 0 0 0 4px rgba(47,158,68,.14); }
+
+  .hero-visual { position: relative; }
+  .hero-visual img {
+    width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+    border-radius: 24px; box-shadow: var(--shadow);
+  }
+  .hero-visual .rating-card {
+    position: absolute; left: -20px; bottom: 24px;
+    background: rgba(255,255,255,.9); backdrop-filter: blur(12px);
+    border-radius: 18px; padding: 16px 20px;
+    box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 14px;
+    border: 1px solid rgba(255,255,255,.6);
+  }
+  .rating-card .score { font-family: var(--display); font-size: 28px; line-height: 1; color: var(--red); font-weight: 700; }
+  .rating-card .meta { font-size: 12.5px; color: var(--ink-soft); line-height: 1.35; }
+  .rating-card .meta b { display: block; color: var(--ink); font-size: 13.5px; }
+  .rating-card .stars { color: var(--gold); letter-spacing: 2px; font-size: 12px; }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    margin-top: 72px; padding: 32px 0 0;
+    border-top: 1px solid var(--line);
+  }
+  .stat { padding-right: 24px; }
+  .stat .num { font-family: var(--display); font-size: 26px; line-height: 1; color: var(--ink); font-weight: 600; letter-spacing: -.02em; }
+  .stat .num small { font-size: 14px; color: var(--muted); }
+  .stat .lbl { font-size: 12.5px; color: var(--muted); margin-top: 8px; font-weight: 600; }
+
+  /* ---------- Strip ---------- */
+  .strip { background: var(--ink); color: rgba(251,246,239,.75); padding: 16px 0; overflow: hidden; margin-top: 72px; }
+  .strip-track { display: flex; gap: 44px; width: max-content; animation: marquee 44s linear infinite; }
+  .strip-track span { font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: .04em; white-space: nowrap; display: inline-flex; align-items: center; gap: 44px; }
+  .strip-track span::after { content: '·'; color: var(--saffron); font-weight: 800; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  .strip:hover .strip-track { animation-play-state: paused; }
+
+  /* ---------- Section base ---------- */
+  section { padding: clamp(72px, 8.5vw, 116px) 0; }
+  .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: clamp(36px, 4.5vw, 56px); }
+  .eyebrow { font-size: 11.5px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; }
+  .h2 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.6vw, 42px); line-height: 1.08; letter-spacing: -.03em; max-width: 20ch; }
+  .section-head p { max-width: 40ch; color: var(--muted); font-size: 15.5px; }
+
+  /* ---------- Menu ---------- */
+  .menu-tabs {
+    display: inline-flex; padding: 5px; gap: 4px;
+    background: var(--cream-2); border-radius: 999px; margin-bottom: 40px;
+  }
+  .menu-tab {
+    padding: 9px 20px; border-radius: 999px; border: 0;
+    background: transparent; font-size: 13.5px; font-weight: 700; color: var(--ink-soft);
+    cursor: pointer; transition: .2s;
+  }
+  .menu-tab:hover { color: var(--red); }
+  .menu-tab.active { background: #fff; color: var(--ink); box-shadow: 0 2px 8px rgba(45,25,10,.08); }
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: clamp(20px, 2.4vw, 30px); }
+  .dish {
+    background: #fff; border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--line);
+    transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s;
+    display: flex; flex-direction: column;
+  }
+  .dish:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
+  .dish-media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--cream-2); }
+  .dish-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+  .dish:hover .dish-media img { transform: scale(1.05); }
+  .dish-tag {
+    position: absolute; top: 12px; left: 12px;
+    padding: 4px 11px; border-radius: 999px; font-size: 10px; font-weight: 800;
+    letter-spacing: .1em; text-transform: uppercase;
+    background: #fff; color: var(--red);
+  }
+  .dish-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+  .dish-name { font-size: 17px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 3px; }
+  .dish-translit { font-size: 12px; color: var(--muted); margin-bottom: 10px; letter-spacing: .02em; }
+  .dish-desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; margin-bottom: 18px; flex: 1; }
+  .dish-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--line); }
+  .dish-price { font-size: 19px; font-weight: 800; color: var(--ink); letter-spacing: -.02em; }
+  .dish-price small { font-size: 12.5px; color: var(--muted); font-weight: 600; margin-left: 6px; }
+
+  /* ---------- Gallery ---------- */
+  .gallery { background: var(--cream-2); }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .gallery-cell { position: relative; overflow: hidden; border-radius: 16px; aspect-ratio: 4 / 3; background: #e6d9c6; }
+  .gallery-cell img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .gallery-cell:hover img { transform: scale(1.05); }
+  .gallery-note { margin-top: 22px; font-size: 12.5px; color: var(--muted); }
+
+  /* ---------- About ---------- */
+  .about-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: clamp(36px, 6vw, 80px); align-items: center; }
+  .about-media { border-radius: 20px; overflow: hidden; aspect-ratio: 4 / 5; box-shadow: var(--shadow-sm); }
+  .about-media img { width: 100%; height: 100%; object-fit: cover; }
+  .about-copy p { color: var(--ink-soft); margin-bottom: 16px; font-size: 15.5px; }
+  .feature-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; margin-top: 28px; }
+  .feature-list li { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: var(--ink); }
+  .feature-list li::before {
+    content: ''; flex: none; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--cream-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%23a8321e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/13px no-repeat;
+  }
+
+  /* ============ ORDER ============ */
+  .order { background: var(--ink); color: #fff; position: relative; overflow: hidden; }
+  .order::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(60% 80% at 100% 0%, rgba(224,122,46,.18), transparent 60%);
+    pointer-events: none;
+  }
+  .order > .wrap { position: relative; }
+
+  .order-head {
+    display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: end;
+    margin-bottom: clamp(40px, 5vw, 64px);
+  }
+  .order .eyebrow { color: var(--saffron); }
+  .order .h2 { color: #fff; }
+  .order-lead { color: rgba(255,255,255,.62); font-size: 15.5px; max-width: 42ch; }
+
+  .order-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(32px, 5vw, 64px); align-items: start; }
+
+  .steps { list-style: none; display: grid; gap: 22px; }
+  .steps li { display: flex; gap: 16px; align-items: flex-start; }
+  .step-num {
+    flex: none; font-family: var(--display); font-size: 13px; font-weight: 700;
+    color: var(--saffron); padding-top: 3px; letter-spacing: .06em;
+  }
+  .steps b { display: block; font-size: 15.5px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+  .steps span { font-size: 13.5px; color: rgba(255,255,255,.55); line-height: 1.5; }
+  .order-alt {
+    margin-top: 34px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.12);
+    display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center;
+    font-size: 13.5px; color: rgba(255,255,255,.55);
+  }
+  .order-alt a { color: #fff; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,.3); padding-bottom: 1px; transition: border-color .2s; }
+  .order-alt a:hover { border-color: var(--saffron); }
+
+  .order-panel { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 22px; padding: clamp(22px, 3vw, 34px); }
+
+  .segmented {
+    position: relative; display: inline-flex; padding: 4px; border-radius: 999px;
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+    margin-bottom: 22px;
+  }
+  .seg-btn {
+    position: relative; z-index: 1; padding: 8px 20px; border: 0; background: transparent;
+    color: rgba(255,255,255,.6); font-family: var(--sans); font-size: 13.5px; font-weight: 700;
+    cursor: pointer; border-radius: 999px; transition: color .25s;
+  }
+  .seg-btn.active { color: var(--ink); }
+  .seg-thumb {
+    position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px);
+    background: #fff; border-radius: 999px; transition: transform .3s cubic-bezier(.2,.7,.2,1);
+  }
+  .segmented[data-mode="delivery"] .seg-thumb { transform: translateX(100%); }
+
+  .field-line { display: flex; gap: 10px; margin-bottom: 18px; }
+  .field-line input {
+    flex: 1; min-width: 0; padding: 16px 18px; border-radius: 14px;
+    border: 1.5px solid rgba(255,255,255,.14); background: rgba(0,0,0,.25);
+    color: #fff; font-family: var(--sans); font-size: 16px; outline: none;
+    transition: border-color .2s, background .2s;
+  }
+  .field-line input::placeholder { color: rgba(255,255,255,.35); }
+  .field-line input:focus { border-color: var(--saffron); background: rgba(0,0,0,.35); }
+  .btn-submit { padding: 0 24px; display: inline-flex; align-items: center; gap: 8px; flex: none; border-radius: 14px; }
+  .btn-submit svg { transition: transform .2s; }
+  .btn-submit:hover svg { transform: translateX(3px); }
+
+  .field-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .order-panel .field { margin-bottom: 14px; }
+  .order-panel .field:last-of-type { margin-bottom: 0; }
+  .order-panel .field label {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 7px;
+  }
+  .order-panel .field input,
+  .order-panel .field textarea,
+  .order-panel .field select {
+    width: 100%; padding: 13px 15px; border-radius: 12px;
+    border: 1.5px solid rgba(255,255,255,.14); background: rgba(0,0,0,.25);
+    color: #fff; font-family: var(--sans); font-size: 14.5px; outline: none;
+    transition: border-color .2s, background .2s;
+  }
+  .order-panel .field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-opacity='.5' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; cursor: pointer; }
+  .order-panel .field select option { background: var(--ink); color: #fff; }
+  .order-panel .field input::placeholder,
+  .order-panel .field textarea::placeholder { color: rgba(255,255,255,.32); }
+  .order-panel .field input:focus,
+  .order-panel .field textarea:focus,
+  .order-panel .field select:focus { border-color: var(--saffron); background: rgba(0,0,0,.35); }
+  .order-panel .field textarea { resize: vertical; min-height: 80px; }
+
+  .form-note { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.5; margin-top: 16px; }
+
+  .form-success { display: none; text-align: center; padding: 40px 10px; }
+  .form-success.show { display: block; }
+  .form-success .check { width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,.1); color: var(--saffron); display: grid; place-items: center; margin: 0 auto 18px; }
+  .form-success h3 { font-family: var(--display); font-size: 20px; font-weight: 600; margin-bottom: 8px; color: #fff; }
+  .form-success p { color: rgba(255,255,255,.6); font-size: 14.5px; }
+
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ---------- Contacts ---------- */
+  .contacts-list { border-top: 1px solid var(--line); }
+  .contact-row {
+    display: grid; grid-template-columns: 200px 1fr auto;
+    gap: 24px; align-items: center;
+    padding: 26px 4px; border-bottom: 1px solid var(--line);
+  }
+  .contact-row .label { font-size: 11.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--saffron); }
+  .contact-row .value { font-size: 17px; font-weight: 700; color: var(--ink); }
+  .contact-row .sub { font-size: 13px; color: var(--muted); margin-top: 2px; font-weight: 500; }
+  .contact-row .action a { font-size: 14px; font-weight: 700; color: var(--red); }
+  .contact-row .action a:hover { text-decoration: underline; }
+
+  /* ---------- Footer ---------- */
+  .site-footer { background: var(--cream-2); padding: 56px 0 30px; border-top: 1px solid var(--line); }
+  .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
+  .footer-brand { max-width: 320px; }
+  .footer-brand .brand { margin-bottom: 14px; }
+  .footer-brand .brand-mark { background: var(--red); color: #fff; }
+  .footer-brand p { font-size: 13.5px; color: var(--muted); }
+  .footer-links { display: flex; gap: 60px; flex-wrap: wrap; }
+  .footer-col h4 { font-size: 11.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); margin-bottom: 16px; }
+  .footer-col a { display: block; font-size: 14px; color: var(--ink-soft); margin-bottom: 10px; transition: color .2s; }
+  .footer-col a:hover { color: var(--red); }
+  .footer-bottom { padding-top: 26px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+
+  /* ---------- Back to top ---------- */
+  .to-top {
+    position: fixed; right: 22px; bottom: 96px; z-index: 90;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--ink); color: #fff; border: 0; cursor: pointer;
+    display: grid; place-items: center;
+    opacity: 0; pointer-events: none; transform: translateY(10px);
+    transition: .3s; box-shadow: var(--shadow-sm);
+  }
+  .to-top.show { opacity: 1; pointer-events: auto; transform: none; }
+  .to-top:hover { background: var(--red); }
+
+  /* ---------- Mobile sticky CTA ---------- */
+  .mobile-cta {
+    position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 95;
+    display: none; gap: 10px;
+    background: rgba(251,246,239,.96); backdrop-filter: blur(14px);
+    border: 1px solid var(--line); border-radius: 16px; padding: 10px;
+    box-shadow: var(--shadow);
+  }
+  .mobile-cta a { flex: 1; }
+  .mobile-cta .btn { width: 100%; padding: 12px; font-size: 14px; }
+
+  /* ---------- Reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .strip-track { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .nav-links { display: none; }
+    .burger { display: grid; }
+    .header-actions .btn-ghost { display: none; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { max-width: 460px; }
+    .hero-visual .rating-card { left: auto; right: 16px; bottom: 16px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; gap: 24px 0; }
+    .stat:nth-child(2) { padding-right: 0; }
+    .about-grid { grid-template-columns: 1fr; }
+    .order-head { grid-template-columns: 1fr; gap: 18px; align-items: start; }
+    .order-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-row { grid-template-columns: 150px 1fr; }
+    .contact-row .action { display: none; }
+    .mobile-cta { display: flex; }
+    .to-top { bottom: 92px; }
+    body { padding-bottom: 82px; }
+  }
+  @media (max-width: 600px) {
+    .site-header { padding: 10px 0; }
+    .header-shell { padding: 7px 7px 7px 13px; }
+    .brand-name { font-size: 14px; }
+    .brand-name small { font-size: 9px; }
+    .hero { padding-top: 108px; }
+    .hero-stats { margin-top: 48px; }
+    .stat .num { font-size: 22px; }
+    .section-head { flex-direction: column; align-items: flex-start; }
+    .feature-list { grid-template-columns: 1fr; }
+    .hero-cta { flex-direction: column; align-items: stretch; }
+    .hero-cta .btn { width: 100%; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .contact-row { grid-template-columns: 1fr; gap: 6px; padding: 20px 0; }
+    .footer-links { gap: 32px; }
+    .menu-tabs { width: 100%; overflow-x: auto; }
+    .field-line { flex-direction: column; }
+    .btn-submit { width: 100%; justify-content: center; padding: 15px; }
+    .field-row-2 { grid-template-columns: 1fr; }
+    .segmented { width: 100%; }
+    .seg-btn { flex: 1; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="wrap">
+    <div class="header-shell">
+      <a href="#top" class="brand" aria-label="Карри - Фаны, на главную">
+        <span class="brand-mark">К</span>
+        <span class="brand-name">Карри - Фаны<small>Indian Kitchen</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Основная навигация">
+        <a href="#menu">Меню</a>
+        <a href="#gallery">Атмосфера</a>
+        <a href="#about">О нас</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <div class="header-actions">
+        <a href="tel:+79961177786" class="btn btn-ghost btn-sm">Позвонить</a>
+        <a href="#order" class="btn btn-primary btn-sm">Заказать</a>
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <div class="mobile-panel">
+    <a href="#menu">Меню</a>
+    <a href="#gallery">Атмосфера</a>
+    <a href="#about">О нас</a>
+    <a href="#contacts">Контакты</a>
+    <a href="tel:+79961177786" class="btn btn-ghost" style="margin-top:14px">Позвонить</a>
+    <a href="#order" class="btn btn-primary">Заказать</a>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="hero-eyebrow">Индийская кухня · Йошкар-Ола</span>
+          <h1>Настоящая <em>Индия</em> у вас в тарелке</h1>
+          <p class="hero-sub">Аутентичные блюда, свежие специи и уютная атмосфера. Приходите в гости или заказывайте на вынос.</p>
+          <div class="hero-cta">
+            <a href="#menu" class="btn btn-primary">Смотреть меню</a>
+            <a href="#order" class="btn btn-ghost">Заказать на вынос</a>
+          </div>
+          <div class="hero-note">
+            <span class="dot"></span>
+            <span>Открыто сегодня до 21:00 · ул. Якова Эшпая, 150</span>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="assets/images/kadhai-chicken.jpeg" alt="Кадхай Курица" fetchpriority="high">
+          <div class="rating-card">
+            <div class="score">4,7</div>
+            <div class="meta">
+              <b>117 оценок</b>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="num" data-count="4.7" data-decimals="1">0</div>
+          <div class="lbl">Рейтинг на картах</div>
+        </div>
+        <div class="stat">
+          <div class="num" data-count="117">0</div>
+          <div class="lbl">Оценок гостей</div>
+        </div>
+        <div class="stat">
+          <div class="num" data-count="48"><span>0</span><small>+</small></div>
+          <div class="lbl">Позиций в меню</div>
+        </div>
+        <div class="stat">
+          <div class="num">11–21</div>
+          <div class="lbl">Часы работы</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      <span>Кадхай Курица</span><span>Куриная Корма</span><span>Дам Бирьяни</span><span>Лачха Паратха</span><span>Масала Чай</span><span>Чесночный Наан</span>
+      <span>Кадхай Курица</span><span>Куриная Корма</span><span>Дам Бирьяни</span><span>Лачха Паратха</span><span>Масала Чай</span><span>Чесночный Наан</span>
+    </div>
+  </div>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">Меню</div>
+          <h2 class="h2">Блюда, которые<br>стоит попробовать</h2>
+        </div>
+        <p>Более 48 позиций: от классических карри до вегетарианских блюд и свежих лепёшек.</p>
+      </div>
+
+      <div class="menu-tabs reveal" role="tablist" aria-label="Категории меню">
+        <button class="menu-tab active" data-cat="all" role="tab" aria-selected="true">Все</button>
+        <button class="menu-tab" data-cat="main" role="tab" aria-selected="false">Основные</button>
+        <button class="menu-tab" data-cat="bread" role="tab" aria-selected="false">Хлеб</button>
+        <button class="menu-tab" data-cat="dessert" role="tab" aria-selected="false">Десерты</button>
+      </div>
+
+      <div class="menu-grid" id="menuGrid">
+        <article class="dish reveal" data-cat="main">
+          <div class="dish-media">
+            <img src="assets/images/kadhai-chicken.jpeg" alt="Кадхай Курица" loading="lazy">
+            <span class="dish-tag">Хит</span>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-name">Кадхай Курица</h3>
+            <div class="dish-translit">Kadhai Chicken</div>
+            <p class="dish-desc">Курица, томлённая со специями и овощами в традиционном казане.</p>
+            <div class="dish-foot"><span class="dish-price">1100 ₽<small>350 г</small></span></div>
+          </div>
+        </article>
+
+        <article class="dish reveal" data-cat="main">
+          <div class="dish-media">
+            <img src="assets/images/chicken-korma.jpeg" alt="Куриная Корма" loading="lazy">
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-name">Куриная Корма</h3>
+            <div class="dish-translit">Chicken Korma</div>
+            <p class="dish-desc">Нежный кремовый соус, миндаль и мягкие специи.</p>
+            <div class="dish-foot"><span class="dish-price">1000 ₽<small>350 г</small></span></div>
+          </div>
+        </article>
+
+        <article class="dish reveal" data-cat="main">
+          <div class="dish-media">
+            <img src="assets/images/dum-biryani.jpeg" alt="Курица Дам Бирьяни" loading="lazy">
+            <span class="dish-tag">Популярное</span>
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-name">Курица Дам Бирьяни</h3>
+            <div class="dish-translit">Dum Biryani</div>
+            <p class="dish-desc">Рис басмати слоями с мясом, специями, травами и карамелизированным луком.</p>
+            <div class="dish-foot"><span class="dish-price">1050 ₽<small>950 г</small></span></div>
+          </div>
+        </article>
+
+        <article class="dish reveal" data-cat="bread">
+          <div class="dish-media">
+            <img src="assets/images/lachha-paratha.jpeg" alt="Лачха Паратха" loading="lazy">
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-name">Лачха Паратха</h3>
+            <div class="dish-translit">Lachha Paratha</div>
+            <p class="dish-desc">Слоёная лепёшка из тандыра — идеальна к основным блюдам.</p>
+            <div class="dish-foot"><span class="dish-price">150 ₽<small>50 г</small></span></div>
+          </div>
+        </article>
+
+        <article class="dish reveal" data-cat="bread">
+          <div class="dish-media">
+            <img src="assets/images/garlic-naan.jpeg" alt="Чесночный наан" loading="lazy">
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-name">Чесночный Наан</h3>
+            <div class="dish-translit">Garlic Naan</div>
+            <p class="dish-desc">Мягкая лепёшка с чесноком и сливочным маслом.</p>
+            <div class="dish-foot"><span class="dish-price">250 ₽<small>150 г</small></span></div>
+          </div>
+        </article>
+
+        <article class="dish reveal" data-cat="dessert">
+          <div class="dish-media">
+            <img src="assets/images/gulab-jamun.jpeg" alt="Гулаб Джамун" loading="lazy">
+          </div>
+          <div class="dish-body">
+            <h3 class="dish-name">Гулаб Джамун</h3>
+            <div class="dish-translit">Gulab Jamun</div>
+            <p class="dish-desc">Традиционный индийский десерт в сиропе.</p>
+            <div class="dish-foot"><span class="dish-price">260 ₽<small>100 г</small></span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">Атмосфера</div>
+          <h2 class="h2">Посмотрите,<br>как у нас</h2>
+        </div>
+        <p>Зал, блюда и детали, из которых складывается вечер.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-cell reveal">
+          <img src="assets/images/restaurant-hall.jpg" alt="Зал ресторана" loading="lazy">
+        </div>
+        <div class="gallery-cell reveal">
+          <img src="assets/images/kadhai-chicken.jpeg" alt="Кадхай Курица" loading="lazy">
+        </div>
+        <div class="gallery-cell reveal">
+          <img src="assets/images/restaurant-interior.jpg" alt="Интерьер ресторана" loading="lazy">
+        </div>
+        <div class="gallery-cell reveal">
+          <img src="assets/images/dum-biryani.jpeg" alt="Курица Дам Бирьяни" loading="lazy">
+        </div>
+        <div class="gallery-cell reveal">
+          <img src="assets/images/atmosphere.jpg" alt="Атмосфера" loading="lazy">
+        </div>
+        <div class="gallery-cell reveal">
+          <img src="assets/images/gulab-jamun.jpeg" alt="Гулаб Джамун" loading="lazy">
+        </div>
+      </div>
+      <p class="gallery-note">Фото предоставлены рестораном. В прототипе использованы изображения с карточки на Яндекс Картах и Яндекс Еде.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div class="about-media reveal">
+        <img src="assets/images/restaurant-interior.jpg" alt="Интерьер ресторана Карри - Фаны" loading="lazy">
+      </div>
+      <div class="about-copy reveal">
+        <div class="eyebrow">О ресторане</div>
+        <h2 class="h2" style="margin-bottom:22px">Место, где<br>Индия рядом</h2>
+        <p>«Карри-Фаны» — ресторан индийской кухни в Йошкар-Оле. Мы готовим аутентичные блюда: курицу с чили, кадхай панир, масала чай и чесночный наан.</p>
+        <p>Настоящие специи, свежие продукты и внимание к деталям. У нас найдут блюда на свой вкус и мясоеды, и вегетарианцы.</p>
+        <ul class="feature-list">
+          <li>Доставка и вынос</li>
+          <li>Кофе с собой</li>
+          <li>Можно с собакой</li>
+          <li>Средний чек 200–1500 ₽</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER -->
+  <section class="order" id="order">
+    <div class="wrap">
+      <div class="order-head">
+        <div>
+          <div class="eyebrow">Заказ</div>
+          <h2 class="h2">Заказ на вынос<br>за минуту</h2>
+        </div>
+        <p class="order-lead">Без корзины и регистрации. Выберите способ, оставьте телефон — перезвоним и подтвердим. Обычно это занимает 3–5 минут.</p>
+      </div>
+
+      <div class="order-grid">
+        <div class="order-steps">
+          <ol class="steps">
+            <li>
+              <span class="step-num">01</span>
+              <div>
+                <b>Выберите блюда</b>
+                <span>Меню выше или скажите нам — поможем собрать заказ.</span>
+              </div>
+            </li>
+            <li>
+              <span class="step-num">02</span>
+              <div>
+                <b>Оставьте телефон</b>
+                <span>Одна строка — никаких анкет и лишних полей.</span>
+              </div>
+            </li>
+            <li>
+              <span class="step-num">03</span>
+              <div>
+                <b>Заберите заказ</b>
+                <span>Перезвоним, подтвердим и скажем, когда подойти.</span>
+              </div>
+            </li>
+          </ol>
+
+          <div class="order-alt">
+            <span>Удобнее в мессенджере?</span>
+            <a href="https://wa.me/79933883623" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="https://t.me/+79961177786" target="_blank" rel="noopener">Telegram</a>
+          </div>
+        </div>
+
+        <div class="order-panel">
+          <div class="segmented" role="tablist" aria-label="Способ получения">
+            <button class="seg-btn active" data-mode="pickup" role="tab" aria-selected="true">Самовывоз</button>
+            <button class="seg-btn" data-mode="delivery" role="tab" aria-selected="false">Доставка</button>
+            <span class="seg-thumb" aria-hidden="true"></span>
+          </div>
+
+          <form id="order-form" novalidate>
+            <div class="field-line">
+              <label for="f-phone" class="visually-hidden">Телефон</label>
+              <input id="f-phone" type="tel" placeholder="+7 (___) ___-__-__" required autocomplete="tel" inputmode="tel">
+              <button type="submit" class="btn btn-primary btn-submit" aria-label="Отправить заявку">
+                <span>Заказать</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+            </div>
+
+            <div class="field-row-2">
+              <div class="field">
+                <label for="f-name">Имя</label>
+                <input id="f-name" type="text" placeholder="Необязательно" autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="f-time">Когда</label>
+                <select id="f-time">
+                  <option>Ближайшее время</option>
+                  <option>Через 30 минут</option>
+                  <option>Через час</option>
+                  <option>Ко времени</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="f-comment">Комментарий</label>
+              <textarea id="f-comment" placeholder="Например: Кадхай Курица — 1, Лачха Паратха — 2, без острого"></textarea>
+            </div>
+
+            <p class="form-note">Нажимая «Заказать», вы соглашаетесь на обработку персональных данных. Перезвоним в течение 15 минут в часы работы.</p>
+          </form>
+
+          <div class="form-success" id="form-success">
+            <div class="check">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <h3>Заявка принята</h3>
+            <p>Перезвоним в течение 15 минут и подтвердим заказ.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section id="contacts">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">Контакты</div>
+          <h2 class="h2">Ждём вас<br>каждый день</h2>
+        </div>
+        <p>Мы открыты с 11:00 до 21:00. Заходите в гости или заказывайте на вынос.</p>
+      </div>
+      <div class="contacts-list reveal">
+        <div class="contact-row">
+          <div class="label">Адрес</div>
+          <div>
+            <div class="value">ул. Якова Эшпая, 150</div>
+            <div class="sub">Йошкар-Ола, 424002</div>
+          </div>
+          <div class="action"><a href="#">На карте</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="label">Телефон</div>
+          <div>
+            <div class="value">+7 (996) 117-77-86</div>
+            <div class="sub">Ежедневно 11:00–21:00</div>
+          </div>
+          <div class="action"><a href="tel:+79961177786">Позвонить</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="label">Мессенджеры</div>
+          <div>
+            <div class="value">WhatsApp · Telegram</div>
+            <div class="sub">Ответим в течение дня</div>
+          </div>
+          <div class="action"><a href="https://wa.me/79933883623" target="_blank" rel="noopener">Написать</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="label">Рейтинг</div>
+          <div>
+            <div class="value">4,7 из 5</div>
+            <div class="sub">117 оценок · 74 отзыва на Яндекс Картах</div>
+          </div>
+          <div class="action"><a href="#">Отзывы</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand"><span class="brand-mark">К</span><span class="brand-name">Карри - Фаны<small>Indian Kitchen · Йошкар-Ола</small></span></div>
+        <p>Ресторан индийской кухни. Аутентичные блюда, свежие специи и уютная атмосфера.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Навигация</h4>
+          <a href="#menu">Меню</a>
+          <a href="#order">Заказ на вынос</a>
+          <a href="#contacts">Контакты</a>
+        </div>
+        <div class="footer-col">
+          <h4>Связаться</h4>
+          <a href="tel:+79961177786">+7 (996) 117-77-86</a>
+          <a href="https://wa.me/79933883623" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://t.me/+79961177786" target="_blank" rel="noopener">Telegram</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Карри - Фаны. Все права защищены.</span>
+      <span>ул. Якова Эшпая, 150 · Йошкар-Ола</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Наверх">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5"/>
+    <path d="m5 12 7-7 7 7"/>
+  </svg>
+</button>
+
+<div class="mobile-cta">
+  <a href="tel:+79961177786" class="btn btn-ghost">Позвонить</a>
+  <a href="#order" class="btn btn-primary">Заказать</a>
+</div>
+
+<script>
+  const header = document.getElementById('header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closeMenu = () => { burger.classList.remove('open'); burger.setAttribute('aria-expanded','false'); mobileMenu.classList.remove('open'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
+  burger.addEventListener('click', () => {
+    const open = !mobileMenu.classList.contains('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    mobileMenu.classList.toggle('open', open);
+    mobileMenu.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu || e.target.tagName === 'A') closeMenu(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const tabs = document.querySelectorAll('.menu-tab');
+  const dishes = document.querySelectorAll('#menuGrid .dish');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+      const cat = tab.dataset.cat;
+      dishes.forEach(d => { d.style.display = (cat === 'all' || d.dataset.cat === cat) ? '' : 'none'; });
+    });
+  });
+
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const suffix = el.querySelector('small') ? el.querySelector('small').outerHTML : '';
+      const duration = 1400;
+      const start = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const val = (target * eased).toFixed(decimals).replace('.', ',');
+        el.innerHTML = val + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+      counterIO.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-count]').forEach(el => counterIO.observe(el));
+
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => toTop.classList.toggle('show', window.scrollY > 600), { passive: true });
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const segmented = document.querySelector('.segmented');
+  const segBtns = document.querySelectorAll('.seg-btn');
+  segBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      segBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+      segmented.dataset.mode = btn.dataset.mode;
+    });
+  });
+
+  const form = document.getElementById('order-form');
+  const success = document.getElementById('form-success');
+  const phone = form.querySelector('#f-phone');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const digits = phone.value.replace(/\D/g, '');
+    if (digits.length < 10) { phone.focus(); phone.style.borderColor = '#e07a2e'; return; }
+    phone.style.borderColor = '';
+    form.style.display = 'none';
+    success.classList.add('show');
+  });
+</script>
+
+</body>
+</html>
