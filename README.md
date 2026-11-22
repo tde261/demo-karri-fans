@@ -4,4 +4,6 @@
 
 Все изображения сохранены локально в `assets/images/` — внешние ссылки на Яндекс Еду и Яндекс Карты из прототипа заменены на локальные пути. Фавикон (`favicon.svg`, `favicon.ico`, `favicon.png`) сгенерирован по фирменным цветам сайта.
 
-Сайт опубликован через GitHub Pages.
+Сайт опубликован через GitHub Pages: https://tde261.github.io/demo-karri-fans/
+
+Для публикаций в Telegram и соцсетях добавлены Open Graph / Twitter Card теги и баннер `og-image.png` размером 1200×630.
